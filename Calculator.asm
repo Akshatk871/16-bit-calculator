@@ -36,6 +36,8 @@ MOV CHOICE, AX              ;the input from keyboard is stored in AL, we tempora
 
 MOV AX, CHOICE
 
+;Comparing the value of AX
+
 CMP AL, '1'
 JE ADDITION
 
@@ -71,10 +73,11 @@ JE TOOCTAL
 CMP AL, 'B'
 JE TOHEXA
 
-ADDITION: 
+ADDITION:    ;Addition 
     LEA DX, MES1
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX, 48               
@@ -82,7 +85,8 @@ ADDITION:
     
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH,1
     INT 21H    
     SUB AX, 48
@@ -98,10 +102,11 @@ ADDITION:
     JMP PRINTRES  
     JMP EXIT
        
-SUBTRACTION:
+SUBTRACTION:  ;Subtraction
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX, 48               
@@ -109,7 +114,8 @@ SUBTRACTION:
     
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH,1
     INT 21H 
     SUB AX, 48
@@ -125,10 +131,11 @@ SUBTRACTION:
     JMP PRINTRES  
     JMP EXIT
 
-MULTIPLICATION:
+MULTIPLICATION: ;Multiplication
     LEA DX, MES1
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX,48               
@@ -136,7 +143,8 @@ MULTIPLICATION:
     
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH,1
     INT 21H 
     SUB AX,48
@@ -151,10 +159,11 @@ MULTIPLICATION:
     JMP PRINTRES  
     JMP EXIT
 
-DIVISION:
+DIVISION:    ;Division
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX, 48               
@@ -162,7 +171,8 @@ DIVISION:
     
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH,1
     INT 21H
     SUB AX, 48
@@ -177,10 +187,11 @@ DIVISION:
     
     JMP PRINTRES  
     JMP EXIT
-LOGICALAND:
+LOGICALAND:  ;Logical And
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX,48               
@@ -188,7 +199,8 @@ LOGICALAND:
     
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH,1
     INT 21H 
     SUB AX,48
@@ -203,10 +215,11 @@ LOGICALAND:
     JMP PRINTRES
     JMP EXIT
     
-LOGICALOR:
+LOGICALOR:  ;Logical OR
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX, 48               
@@ -214,7 +227,8 @@ LOGICALOR:
     
     LEA DX, MES2
     MOV AH, 09H
-    INT 21H
+    INT 21H  
+    ; taking input
     MOV AH,1
     INT 21H 
     SUB AX, 48
@@ -230,18 +244,20 @@ LOGICALOR:
     JMP PRINTRES
     JMP EXIT
 
-LOGICALXOR:
+LOGICALXOR:  ;logical Xor
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX, 48               
-    MOV OPRND1, AX
+    MOV OPRND1, AX  
     
     LEA DX, MES2
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH,1
     INT 21H
     SUB AX, 48
@@ -256,10 +272,11 @@ LOGICALXOR:
     JMP PRINTRES
     JMP EXIT            
 
-LOGICALNOT:
+LOGICALNOT:   ;Logical Not
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH, 1               
     INT 021H 
     SUB AX, 48               
@@ -272,10 +289,11 @@ LOGICALNOT:
     
     JMP PRINTRES
     JMP EXIT    
-TOBINARY:
+TOBINARY:     ;Decimal to Binary Coversation
     LEA DX, MES1
     MOV AH, 09H
-    INT 21H
+    INT 21H 
+    ; taking input
     MOV AH, 1               
     INT 021H
     SUB AX, 48
@@ -307,103 +325,13 @@ TOBINARY:
     POP AX 
     JMP EXIT
    
-;TODECIMAL:
-;    LEA DX, MES1
-;    MOV AH, 09H
-;    INT 21H
-;    MOV AH, 1               
-;    INT 021H
-;    SUB AX, 48
-;    ;    PUSH AX
-;    ;PUSH BX
-;    ;PUSH CX
-;    ;PUSH DX
-;    ;XOR AX, AX
-;    ;XOR CX, CX
-;    ;
-;    ;L1:
-;    ;  XOR DX, DX
-;    ;  MOV BX, 10
-;    ;  MUL BX
-;    ;  MOV BX, 0
-;    ;  MOV BL, DL
-;    ;  ADD AX, BX
-;    ;  SHR AX, 1
-;    ;  ADD CX, 1
-;    ;  TEST AX, AX
-;    ;  JNZ L1
-;    ;
-;    ;L2:
-;    ;  MOV AH, 0
-;    ;  DIV CX
-;    ;  PUSH DX
-;    ;  XOR DX, DX
-;    ;  DEC CX
-;    ;  OR CX, CX
-;    ;  JNZ L2
-;    ;
-;    ;L3:
-;    ;  POP DX
-;    ;  ADD DL, '0'
-;    ;  MOV AH, 2
-;    ;  INT 21H
-;    ;  LOOP L3
-;    ;
-;    ;POP DX
-;    ;POP CX
-;    ;POP BX
-;    ;POP AX
-;    MOV BX, AX
-;  MOV AX, 0
-;  
-;  L1:
-;    SHL AX, 1
-;    RCL BX, 1
-;    AND BX, 0000000000000001B
-;    ADD AX, BX
-;    LOOP L1
-;  
-;  MOV DECIMAL, AX
-;  
-;  MOV AX, DECIMAL
-;  MOV BH, 0
-;  MOV BL, 10
-;
-;  
-;
-;    PUSH AX
-;    PUSH BX
-;    PUSH CX
-;    PUSH DX
-;    MOV BX, 10
-;    XOR CX, CX
-;  
-;    L2:
-;      XOR DX, DX
-;      DIV BX
-;      ADD DL, '0'
-;      PUSH DX
-;      INC CX
-;      OR AX, AX
-;      JNE L2
-;  
-;    L3:
-;      POP DX
-;      MOV AH, 2
-;      INT 21H
-;      LOOP L3
-;  
-;    POP DX
-;    POP CX
-;    POP BX
-;    POP AX  
-;    JMP EXIT
-;
-TOOCTAL:
+
+TOOCTAL:     ;Decimal to Octal Conversation
     
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
+    ; taking input
     MOV AH, 1               
     INT 021H
     SUB AX, 48
@@ -454,7 +382,7 @@ PRINT1:
     DEC CX
        JMP PRINT1   
 
-TOHEXA:
+TOHEXA:    ;Decimal to HexaDecimal
     LEA DX, MES1
     MOV AH, 09H
     INT 21H
