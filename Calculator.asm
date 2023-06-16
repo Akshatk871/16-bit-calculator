@@ -31,8 +31,7 @@ INT 21H
      
 MOV AH, 1               ;single character input
 INT 021H                ;take input
-MOV CHOICE, AX              ;the input from keyboard is stored in AL, we temporarily
-                            ;store it in BL
+MOV CHOICE, AX          ;Store the value in choice
 
 MOV AX, CHOICE
 
